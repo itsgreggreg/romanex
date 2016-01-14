@@ -1,4 +1,4 @@
-defmodule RomanNumerals do
+defmodule Romanex do
   @moduledoc """
   Encode, Decode, and Validate roman numerals.
 
@@ -10,7 +10,7 @@ defmodule RomanNumerals do
   """
 
   @doc "Encode an Integer into a Roman Numeral."
-  @spec encode(pos_integer) :: {:ok | :error, String.t}
+  @spec encode(integer) :: {atom(), String.t}
   def encode(int) when is_integer int do
     cond do
       int >= 5000 -> {:error, "too big"}
@@ -57,7 +57,7 @@ defmodule RomanNumerals do
   V, L, and D may appear only once.
   I, X, C, and M may appear up to 4 times.
   """
-  @spec decode(String.t) :: {:ok | :error, pos_integer}
+  @spec decode(String.t) :: {:ok | :error, non_neg_integer}
   def decode(rnum) when is_binary rnum do
       String.upcase(rnum)
       |> do_decode(0, nil, 0, 1)
@@ -93,10 +93,13 @@ defmodule RomanNumerals do
   @doc "Validates a Roman Numeral. Returns true or false"
   @spec valid?(String.t) :: boolean
   def valid?(rnum) when is_binary rnum do
+    poop 1, 2
     case decode(rnum) do
       {:ok, _} -> true
       _        -> false
     end
   end
+
+  defp poop(a\\10, b\\20), do: a * b
 
 end
