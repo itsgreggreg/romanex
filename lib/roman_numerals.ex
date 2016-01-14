@@ -44,15 +44,18 @@ defmodule RomanNumerals do
   Returns [:ok, result] or [:error, position-of-error]
 
   Lesser value letters that come after Higher value letters signify addition.
-  Lesser value letters that come before Higher value letters signify subtraction.
   Only 1 letter may be subtracted from another letter.
       EX: 8 is VIII and never IIX.
   Subtraction can only occur if the result does not equal another letter.
       EX: 50 is never LC, as L is alread 50.
+  Lesser value letters that come before Higher value letters signify subtraction.
+  Letters that are repeated signify addition.
+  A letter may be repeated at most 3 times.
+      EX: 4 is always IV and never IIII
+  Addition can only occur if the result does not equal another letter.
+      EX: 100 is always C and never LL
   V, L, and D may appear only once.
   I, X, C, and M may appear up to 4 times.
-  A letter may never appear multiple times with another letter inbetween.
-      EX: 9 is IX and never VIV
   """
   @spec decode(String.t) :: integer
   def decode(rnum) when is_binary rnum do
