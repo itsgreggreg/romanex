@@ -12,5 +12,6 @@ defmodule RomanNumeralsTest do
     assert [:ok, 4400] == RomanNumerals.decode "mmmmcccc"
     assert [:ok, 4400] == RomanNumerals.decode "mmmmcd"
     assert [:ok, 1666] == RomanNumerals.decode "mDclXvi"
+    assert [:ok, 4289] == RomanNumerals.decode "MMMMCCLXXXIX"
   end
 end

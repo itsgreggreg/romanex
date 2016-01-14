@@ -53,7 +53,7 @@ defmodule RomanNumerals do
       [?X, ?L] when st == 10 -> [tot+40, 0]
       [a, ?X]  when a in [?M, ?D, ?C, ?L, nil] and rem(tot, 50) == 0 -> [tot+st, 10]
       [?X, ?X] when st < 40 -> [tot, st+10]
-      [?I, ?X] when st == 1 -> [tot+9, ?I, 0]
+      [?I, ?X] when st == 1 -> [tot+9, 0]
       [a, ?V]  when not a in [?I,?V] and rem(tot, 10) == 0 -> [tot+st, 5]
       [?I, ?V] when st == 1 and rem(tot, 10) == 0 -> [tot+4, 0]
       [a, ?I]  when not a in [?I] and rem(tot, 5) == 0 -> [tot+st, 1]
