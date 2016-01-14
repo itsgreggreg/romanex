@@ -10,7 +10,7 @@ Romanex.encode 5000   #-> {:error, "too big"}
 
 ## Decoding. If it errors, it gives you the char it choked on.
 Romanex.decode "XLII" #-> {:ok, 42}
-Romanex.decode? "IIV" #-> {:error, 3}
+Romanex.decode "IIV" #-> {:error, 3}
 
 ## Validating
 Romanex.valid? "IIV" #-> false
