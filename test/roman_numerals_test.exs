@@ -26,4 +26,18 @@ defmodule RomanNumeralsTest do
     assert [:ok, "CDXLIV"] == RomanNumerals.encode 444
     assert [:ok, "MDCLXVI"] == RomanNumerals.encode 1666
   end
+
+  test "Can Validate a Roman Numeral" do
+    assert true == RomanNumerals.valid? "i"
+    assert true == RomanNumerals.valid? "iv"
+    assert true == RomanNumerals.valid? "vi"
+    assert true == RomanNumerals.valid? "XL"
+    assert true == RomanNumerals.valid? "mxliv"
+    assert false == RomanNumerals.valid? "mxlviv"
+    assert false == RomanNumerals.valid? "mimmm"
+    assert false == RomanNumerals.valid? "mcmmmcc"
+    assert true == RomanNumerals.valid? "mmmmcd"
+    assert true == RomanNumerals.valid? "mDclXvi"
+    assert true == RomanNumerals.valid? "MMMMCCLXXXIX"
+  end
 end

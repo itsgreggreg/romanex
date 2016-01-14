@@ -95,7 +95,10 @@ defmodule RomanNumerals do
   @doc "Validates a Roman Numeral. Returns true or false"
   @spec valid?(String.t) :: boolean
   def valid?(rnum) when is_binary rnum do
-
+    case decode(rnum) do
+      [:ok, _] -> true
+      _        -> false
+    end
   end
 
 end
