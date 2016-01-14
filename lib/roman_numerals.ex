@@ -10,7 +10,7 @@ defmodule RomanNumerals do
   """
 
   @doc "Encode an Integer into a Roman Numeral."
-  @spec encode(integer) :: String.t
+  @spec encode(pos_integer) :: {:ok | :error, String.t}
   def encode(int) when is_integer int do
     cond do
       int >= 5000 -> {:error, "too big"}
@@ -57,14 +57,14 @@ defmodule RomanNumerals do
   V, L, and D may appear only once.
   I, X, C, and M may appear up to 4 times.
   """
-  @spec decode(String.t) :: integer
+  @spec decode(String.t) :: {:ok | :error, pos_integer}
   def decode(rnum) when is_binary rnum do
       String.upcase(rnum)
-      |> do_decode
+      |> do_decode(0, nil, 0, 1)
   end
 
   defp do_decode("", total, _, subtotal,_), do: {:ok, total + subtotal}
-  defp do_decode(<<rn::utf8, rns::binary>>, tot\\0, prn\\nil, st\\0, char\\1) do
+  defp do_decode(<<rn::utf8, rns::binary>>, tot, prn, st, char) do
     [tot, st] = case [prn, rn] do
       [nil, ?M] -> [tot, 1000]
       [?M, ?M] when st < 4000 -> [tot, st+1000]
