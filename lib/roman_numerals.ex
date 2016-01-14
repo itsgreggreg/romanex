@@ -13,9 +13,9 @@ defmodule RomanNumerals do
   @spec encode(integer) :: String.t
   def encode(int) when is_integer int do
     cond do
-      int >= 5000 -> [:error, "too big"]
-      int <= 0 -> [:error, "too small"]
-      true -> [:ok, do_encode(int)]
+      int >= 5000 -> {:error, "too big"}
+      int <= 0 -> {:error, "too small"}
+      true -> {:ok, do_encode(int)}
     end
   end
 
@@ -41,7 +41,7 @@ defmodule RomanNumerals do
   @doc ~S"""
   Decode a Roman Numeral into an Integer
 
-  Returns [:ok, result] or [:error, position-of-error]
+  Returns {:ok, result} or {:error, position-of-error}
 
   Lesser value letters that come after Higher value letters signify addition.
   Only 1 letter may be subtracted from another letter.
@@ -60,13 +60,11 @@ defmodule RomanNumerals do
   @spec decode(String.t) :: integer
   def decode(rnum) when is_binary rnum do
       String.upcase(rnum)
-      |> String.to_char_list
       |> do_decode
-
   end
 
-  defp do_decode([], total, _, subtotal,_), do: [:ok, total + subtotal]
-  defp do_decode([rn|rns] , tot\\0, prn\\nil, st\\0, char\\1) do
+  defp do_decode("", total, _, subtotal,_), do: {:ok, total + subtotal}
+  defp do_decode(<<rn::utf8, rns::binary>>, tot\\0, prn\\nil, st\\0, char\\1) do
     [tot, st] = case [prn, rn] do
       [nil, ?M] -> [tot, 1000]
       [?M, ?M] when st < 4000 -> [tot, st+1000]
@@ -87,7 +85,7 @@ defmodule RomanNumerals do
       [_,_] -> [:error, char]
     end
     case [tot, st] do
-      [:error, st] -> [:error, st]
+      [:error, st] -> {:error, st}
       _ -> do_decode(rns, tot, rn, st, char+1)
     end
   end
@@ -96,7 +94,7 @@ defmodule RomanNumerals do
   @spec valid?(String.t) :: boolean
   def valid?(rnum) when is_binary rnum do
     case decode(rnum) do
-      [:ok, _] -> true
+      {:ok, _} -> true
       _        -> false
     end
   end
