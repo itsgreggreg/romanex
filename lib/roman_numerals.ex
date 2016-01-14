@@ -12,7 +12,30 @@ defmodule RomanNumerals do
   @doc "Encode an Integer into a Roman Numeral."
   @spec encode(integer) :: String.t
   def encode(int) when is_integer int do
+    cond do
+      int >= 5000 -> [:error, "too big"]
+      int <= 0 -> [:error, "too small"]
+      true -> [:ok, do_encode(int)]
+    end
+  end
 
+  defp do_encode(int) do
+    cond do
+      int == 0 -> ""
+      int >= 1000 -> "M" <> do_encode(int-1000)
+      int >= 900 -> "CM" <> do_encode(int-900)
+      int >= 500 -> "D" <> do_encode(int-500)
+      int >= 400 -> "CD" <> do_encode(int-400)
+      int >= 100 -> "C" <> do_encode(int-100)
+      int >= 90 -> "XC" <> do_encode(int-90)
+      int >= 50 -> "L" <> do_encode(int-50)
+      int >= 40 -> "XL" <> do_encode(int-40)
+      int >= 10 -> "X" <> do_encode(int-10)
+      int == 9 -> "IX"
+      int >= 5 -> "V" <> do_encode(int-5)
+      int == 4 -> "IV"
+      int >= 1 -> "I" <> do_encode(int-1)
+    end
   end
 
   @doc ~S"""

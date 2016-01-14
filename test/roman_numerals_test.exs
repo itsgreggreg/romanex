@@ -14,4 +14,16 @@ defmodule RomanNumeralsTest do
     assert [:ok, 1666] == RomanNumerals.decode "mDclXvi"
     assert [:ok, 4289] == RomanNumerals.decode "MMMMCCLXXXIX"
   end
+
+  test "Can Encode an Integer to a Roman Numeral" do
+    assert [:error, "too big"] == RomanNumerals.encode 5000
+    assert [:error, "too small"] == RomanNumerals.encode 0
+    assert [:error, "too small"] == RomanNumerals.encode -10
+    assert [:ok, "IX"] == RomanNumerals.encode 9
+    assert [:ok, "MMMM"] == RomanNumerals.encode 4000
+    assert [:ok, "MMMMCM"] == RomanNumerals.encode 4900
+    assert [:ok, "MMMMCMXCIX"] == RomanNumerals.encode 4999
+    assert [:ok, "CDXLIV"] == RomanNumerals.encode 444
+    assert [:ok, "MDCLXVI"] == RomanNumerals.encode 1666
+  end
 end
