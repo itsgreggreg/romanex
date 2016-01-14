@@ -3,7 +3,10 @@ defmodule RomanNumerals do
   Encode, Decode, and Validate roman numerals.
 
   Letter values are:
-    M = 1000, D = 500, C = 100, L = 50, X = 10, V = 5, I = 1
+      M = 1000, D = 500, C = 100, L = 50, X = 10, V = 5, I = 1
+
+  The Range of Values representable by roman numerals is:
+      1 - 4999
   """
 
   @doc "Encode an Integer into a Roman Numeral."
