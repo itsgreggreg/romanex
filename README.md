@@ -18,18 +18,8 @@ Romanex.valid? "MMMMCCLXXXIX" #-> true
 ~~~
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
   1. Add roman_numerals to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:romanex, "~> 0.0.1"}]
+          [{:romanex, "~> 0.1.0"}]
         end
-
-  2. Ensure roman_numerals is started before your application:
-
-        def application do
-          [applications: [:romanex]]
-        end
-
