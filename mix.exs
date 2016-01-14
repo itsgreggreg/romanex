@@ -3,11 +3,21 @@ defmodule Romanex.Mixfile do
 
   def project do
     [app: :romanex,
-     version: "0.0.1",
+     description: "Encode, Decode, and Validate Roman Numerals.",
+     version: "0.1.0",
      elixir: "~> 1.2",
+     package: package,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
+  end
+
+  def package do
+    [
+     maintainers: ["itsgreggreg"],
+     licenses: ["Apache 2.0"],
+     links: %{"GitHub" => "https://github.com/itsgreggreg/romanex"}
+    ]
   end
 
   # Configuration for the OTP application
