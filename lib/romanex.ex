@@ -93,13 +93,10 @@ defmodule Romanex do
   @doc "Validates a Roman Numeral. Returns true or false"
   @spec valid?(String.t) :: boolean
   def valid?(rnum) when is_binary rnum do
-    poop 1, 2
     case decode(rnum) do
       {:ok, _} -> true
       _        -> false
     end
   end
-
-  defp poop(a\\10, b\\20), do: a * b
 
 end
